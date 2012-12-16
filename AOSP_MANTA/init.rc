@@ -349,9 +349,7 @@ on boot
     setprop net.tcp.buffersize.gprs    4096,8760,11680,4096,8760,11680
     setprop net.tcp.buffersize.evdo    4096,87380,563200,4096,16384,262144
     setprop net.tcp.buffersize.evdo_b  4096,87380,704512,4096,16384,262144
-    setprop net.ipv4.tcp_tw_recycle 1
-    setprop net.ipv4.tcp_tw_reuse 1
-    
+
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
 
@@ -519,6 +517,11 @@ service sshd /system/bin/start-ssh
     class main
     disabled
 
+service post-init /sbin/post-init.sh
+    class core
+    user root
+    oneshot
+    
 service mdnsd /system/bin/mdnsd
     class main
     user mdnsr
